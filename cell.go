@@ -68,7 +68,7 @@ func (c *Cell) Width() int {
 	n := 0
 	for _, r := range filterColorCodes(c.formattedValue) {
 		for ; r > 0; r /= 256 {
-			n ++
+			n++
 		}
 	}
 	return n

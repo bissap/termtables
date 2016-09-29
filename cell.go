@@ -65,7 +65,13 @@ func createCell(column int, v interface{}, style *CellStyle) *Cell {
 // run into some fundamental limitations of a cell grid display model as is
 // used in ttys.
 func (c *Cell) Width() int {
-	return utf8.RuneCountInString(filterColorCodes(c.formattedValue))
+	n := 0
+	for _, r := range filterColorCodes(c.formattedValue) {
+		for ; r > 0; r /= 256 {
+			n ++
+		}
+	}
+	return n
 }
 
 // Filter out terminal bold/color sequences in a string.
